@@ -1,0 +1,8 @@
+E:\university\ترم 3\ساختمان داده\Linux\Linux\Linux\Linux\bin\Debug\Linux.exe.config
+E:\university\ترم 3\ساختمان داده\Linux\Linux\Linux\Linux\bin\Debug\Linux.exe
+E:\university\ترم 3\ساختمان داده\Linux\Linux\Linux\Linux\bin\Debug\Linux.pdb
+E:\university\ترم 3\ساختمان داده\Linux\Linux\Linux\Linux\obj\Debug\Linux.csproj.AssemblyReference.cache
+E:\university\ترم 3\ساختمان داده\Linux\Linux\Linux\Linux\obj\Debug\Linux.csproj.SuggestedBindingRedirects.cache
+E:\university\ترم 3\ساختمان داده\Linux\Linux\Linux\Linux\obj\Debug\Linux.csproj.CoreCompileInputs.cache
+E:\university\ترم 3\ساختمان داده\Linux\Linux\Linux\Linux\obj\Debug\Linux.exe
+E:\university\ترم 3\ساختمان داده\Linux\Linux\Linux\Linux\obj\Debug\Linux.pdb
