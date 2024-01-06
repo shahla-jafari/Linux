@@ -85,6 +85,7 @@ namespace Linux
                                         find = true;
                                         break;
                                     }
+                                    temp = temp.next;
                                 }
                                 if (!find)
                                 {
@@ -134,6 +135,7 @@ namespace Linux
                                         find = true;
                                         break;
                                     }
+                                    temp = temp.next;
                                 }
                                 if (!find)
                                 {
@@ -141,11 +143,80 @@ namespace Linux
                                     break;
                                 }
                             }
-                            thisFolder = null;
+                            ListNode<Folder> f = thisFolder.children.first();
+                            while (f != null)
+                            {
+                                if (f.value.Name == address[address.Length - 1])
+                                {
+                                    thisFolder.children.remove(f);
+                                }
+                            }
                             break;
                         }
                     case "cp":
                         {
+                            string masir1 = "";
+                            for (int i = 1; i < st[1].Length; i++)
+                            {
+                                masir1 += st[1][i];
+                            }
+                            thisFolder = tree.root;
+                            Folder copyfromHere = tree.root;
+                            string[] address1 = masir1.Split('/');
+                            for (int i = 0; i < address1.Length - 1; i++)
+                            {
+                                bool find = false;
+                                ListNode<Folder> temp = copyfromHere.children.first();
+                                while (temp != null)
+                                {
+                                    if (temp.value.Name == address1[i])
+                                    {
+                                        copyfromHere = temp.value;
+                                        find = true;
+                                        break;
+                                    }
+                                    temp = temp.next;
+                                }
+                                if (!find)
+                                {
+                                    Console.WriteLine(address1[i] + " not found!");
+                                    break;
+                                }
+                            }
+
+
+
+                            string masir2 = "";
+                            for (int i = 1; i < st[1].Length; i++)
+                            {
+                                masir2 += st[1][i];
+                            }
+                            Folder copyHere = tree.root;
+                            string[] address2 = masir2.Split('/');
+                            for (int i = 0; i < address2.Length - 1; i++)
+                            {
+                                bool find = false;
+                                ListNode<Folder> temp = copyHere.children.first();
+                                while (temp != null)
+                                {
+                                    if (temp.value.Name == address2[i])
+                                    {
+                                        thisFolder = temp.value;
+                                        copyHere = temp.value;
+                                        find = true;
+                                        break;
+                                    }
+                                    temp = temp.next;
+                                }
+                                if (!find)
+                                {
+                                    Console.WriteLine(address2[i] + " not found!");
+                                    break;
+                                }
+                            }
+
+
+                            // کپی شدنش رو ننوشتم هنوز
 
                             break;
                         }
@@ -171,6 +242,7 @@ namespace Linux
                         }
                     case "cd":
                         {
+                            
                             break;
                         }
                     case "find":

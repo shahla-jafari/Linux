@@ -79,5 +79,30 @@ namespace Linux
                 return e;
             }
         }
+
+        public ListNode<T> remove(ListNode<T> e)
+        {
+            ListNode<T> pretemp = head;
+            ListNode<T> temp = head.next;
+            if (size == 0)
+                return null;
+            if (e == head)
+                return removeFirst();
+            else
+            {
+                while (temp != null)
+                {
+                    if (temp == e)
+                    {
+                        pretemp.next = temp.next;
+                        _size--;
+                        return temp;
+                    }
+                    pretemp = pretemp.next;
+                    temp = temp.next;
+                }
+                return null;
+            }
+        }
     }
 }
