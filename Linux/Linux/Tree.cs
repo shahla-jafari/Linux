@@ -6,9 +6,28 @@ using System.Threading.Tasks;
 
 namespace Linux
 {
-    internal class Tree<T>
+    internal class Tree
     {
-        public TreeNode<T> root;
+        public string Name { get; set; }
+        public Folder root;
+        public Tree() { root = null; }
+
+        public int Hight(Folder root)
+        {
+            if (root == null)
+                return 0;
+            ListNode<Folder> temp = root.children.first();
+            int high = 0;
+            while (temp != null)
+            {
+                if (Hight(temp.value) > high)
+                    high = Hight(temp.value);
+                temp = temp.next;
+            }
+            return high + 1;
+        }
+
+
 
     }
 }
