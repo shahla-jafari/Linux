@@ -57,6 +57,8 @@ namespace Linux
                         }
                     case "touch":
                         {
+                            File file = new File(st[1]);
+                            thisFolder.value.addFirst(new ListNode<File>(file));
                             break;
                         }
                     case "rmdir":
