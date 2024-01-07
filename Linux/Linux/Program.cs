@@ -242,7 +242,31 @@ namespace Linux
                         }
                     case "cd":
                         {
-                            
+                            if (st[1] == "..")
+                            {
+                                if (thisFolder != tree.root)
+                                    thisFolder = thisFolder.parent;
+                            }
+                            else
+                            {
+                                bool find = false;
+                                ListNode<Folder> temp = thisFolder.children.first();
+                                while (temp != null)
+                                {
+                                    if (temp.value.Name == st[1])
+                                    {
+                                        thisFolder = temp.value;
+                                        find = true;
+                                        break;
+                                    }
+                                    temp = temp.next;
+                                }
+                                if (!find)
+                                {
+                                    Console.WriteLine(st[1] + " not found!");
+                                    break;
+                                }
+                            }
                             break;
                         }
                     case "find":
@@ -255,10 +279,43 @@ namespace Linux
                         }
                     case "sz":
                         {
+                            string masir = "";
+                            thisFolder = tree.root;
+                            for (int i = 3; i < input.Length; i++)
+                            {
+                                masir += input[i];
+                            }
+
+                            string[] address = masir.Split('/');
+                            for (int i = 0; i < address.Length; i++)
+                            {
+                                bool find = false;
+                                ListNode<Folder> temp = thisFolder.children.first();
+                                while (temp != null)
+                                {
+                                    if (temp.value.Name == address[i])
+                                    {
+                                        thisFolder = temp.value;
+                                        find = true;
+                                        break;
+                                    }
+                                    temp = temp.next;
+                                }
+                                if (!find)
+                                {
+                                    Console.WriteLine(address[i] + " not found!");
+                                    break;
+                                }
+                            }
+                            Console.WriteLine("size of directories : " + thisFolder.children.size);
+                            Console.WriteLine("size of files : " + thisFolder.value.size);
                             break;
                         }
                     default:
-                        break;
+                        {
+                            Console.WriteLine("Error!");
+                            break;
+                        }
                 }
             }
         }
