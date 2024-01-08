@@ -192,7 +192,7 @@ namespace Linux
                             }
                             Folder copyHere = tree.root;
                             string[] address2 = masir2.Split('/');
-                            for (int i = 0; i < address2.Length - 1; i++)
+                            for (int i = 0; i < address2.Length; i++)
                             {
                                 bool find = false;
                                 ListNode<Folder> temp = copyHere.children.first();
@@ -290,7 +290,7 @@ namespace Linux
                             }
                             Folder copyHere = tree.root;
                             string[] address2 = masir2.Split('/');
-                            for (int i = 0; i < address2.Length - 1; i++)
+                            for (int i = 0; i < address2.Length; i++)
                             {
                                 bool find = false;
                                 ListNode<Folder> temp = copyHere.children.first();
@@ -402,6 +402,90 @@ namespace Linux
                         }
                     case "sp":
                         {
+                            string masir1 = "";
+                            for (int i = 1; i < st[1].Length; i++)
+                            {
+                                masir1 += st[1][i];
+                            }
+                            thisFolder = tree.root;
+                            Folder BB1 = tree.root;
+                            string[] address1 = masir1.Split('/');
+                            for (int i = 0; i < address1.Length - 1; i++)
+                            {
+                                bool find = false;
+                                ListNode<Folder> temp = BB1.children.first();
+                                while (temp != null)
+                                {
+                                    if (temp.value.Name == address1[i])
+                                    {
+                                        BB1 = temp.value;
+                                        find = true;
+                                        break;
+                                    }
+                                    temp = temp.next;
+                                }
+                                if (!find)
+                                {
+                                    Console.WriteLine(address1[i] + " not found!");
+                                    break;
+                                }
+                            }
+
+
+                            string masir2 = "";
+                            for (int i = 1; i < st[1].Length; i++)
+                            {
+                                masir2 += st[1][i];
+                            }
+                            Folder BB2 = tree.root;
+                            string[] address2 = masir2.Split('/');
+                            for (int i = 0; i < address2.Length - 1; i++)
+                            {
+                                bool find = false;
+                                ListNode<Folder> temp = BB2.children.first();
+                                while (temp != null)
+                                {
+                                    if (temp.value.Name == address2[i])
+                                    {
+                                        thisFolder = temp.value;
+                                        BB2 = temp.value;
+                                        find = true;
+                                        break;
+                                    }
+                                    temp = temp.next;
+                                }
+                                if (!find)
+                                {
+                                    Console.WriteLine(address2[i] + " not found!");
+                                    break;
+                                }
+                            }
+
+
+                            Folder valedayeBB1 = BB1;
+                            Folder valedayeBB2 = BB2;
+                            Folder valedMoshtarak = tree.root;
+                            bool ft = false;
+                            while (valedayeBB1 != null)
+                            {
+                                valedayeBB2 = BB2;
+                                while (valedayeBB2 != null)
+                                {
+                                    if (valedayeBB2 == valedayeBB1)
+                                    {
+                                        valedMoshtarak = valedayeBB1;
+                                        ft = true;
+                                        break;
+                                    }
+                                    valedayeBB2 = valedayeBB2.parent;
+                                }
+                                if (ft)
+                                    break;
+                                valedayeBB1 = valedayeBB1.parent;
+                            }
+
+                            Console.WriteLine(valedMoshtarak.Name);
+
                             break;
                         }
                     case "sz":
