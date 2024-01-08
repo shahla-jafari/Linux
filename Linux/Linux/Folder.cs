@@ -12,5 +12,11 @@ namespace Linux
         public LinkedList<File> value;
         public LinkedList<Folder> children;
         public Folder parent;
+
+        public Folder()
+        {
+            value = new LinkedList<File>();
+            children = new LinkedList<Folder>();
+        }
     }
 }

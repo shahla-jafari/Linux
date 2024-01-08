@@ -10,12 +10,10 @@ namespace Linux
     {
         static void Main(string[] args)
         {
-            LinkedList<Tree> trees = new LinkedList<Tree>();
-            Tree root = new Tree();
-            trees.addLast(new ListNode<Tree>(root));
-            Tree tree = root;
+            Tree tree = new Tree();
             Folder thisFolder = new Folder();
             thisFolder = tree.root;
+            string account = "root";
             while (true)
             {
                 string input = Console.ReadLine();
@@ -26,20 +24,13 @@ namespace Linux
                     case "su":
                         {
                             string name = st[1];
-                            ListNode<Tree> temp = trees.first();
-                            bool f = false;
-                            while (temp != null)
+                            if (name == "root" || name == "administrator")
                             {
-                                if (temp.value.Name == name)
-                                {
-                                    tree = temp.value;
-                                    Console.WriteLine("You are in " + name + " tree.");
-                                    f = true;
-                                    break;
-                                }
+                                account = name;
+                                Console.WriteLine("you are in " + account + " tree.");
                             }
-                            if (f == false)
-                                Console.WriteLine(name + " not found! you are in " + tree.Name + " tree.");
+                            else
+                                Console.WriteLine(name + " not found! you are in " + account + " tree.");
                             break;
                         }
                     case "pwd":
@@ -52,7 +43,11 @@ namespace Linux
                             }
                             ListNode<string> output = masir.first();
                             while (output != null)
-                                Console.WriteLine(output.value + "/");
+                            {
+                                Console.Write(output.value + "/");
+                                output = output.next;
+                            }
+                            Console.WriteLine();
                             break;
                         }
                     case "mkdir":
@@ -71,7 +66,7 @@ namespace Linux
                             {
                                 masir += input[i];
                             }
-
+                            bool ff = true;
                             string[] address = masir.Split('/');
                             for (int i = 0; i < address.Length - 1; i++)
                             {
@@ -90,12 +85,18 @@ namespace Linux
                                 if (!find)
                                 {
                                     Console.WriteLine(address[i] + " not found!");
+                                    ff = false;
                                     break;
                                 }
                             }
+                            if (!ff)
+                                break;
                             Folder addedF = new Folder();
+                            addedF.parent = thisFolder;
                             addedF.Name = address[address.Length - 1];
                             thisFolder.children.addFirst(new ListNode<Folder>(addedF));
+                            thisFolder = addedF;
+                            Console.WriteLine(addedF.Name + " added.");
                             break;
                         }
                     case "touch":
@@ -398,6 +399,7 @@ namespace Linux
                         }
                     case "find":
                         {
+
                             break;
                         }
                     case "sp":

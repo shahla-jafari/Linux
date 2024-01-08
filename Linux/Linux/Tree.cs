@@ -10,7 +10,14 @@ namespace Linux
     {
         public string Name { get; set; }
         public Folder root;
-        public Tree() { root = null; }
+        public Tree()
+        {
+            root = new Folder();
+            root.Name = "";
+            root.parent = null;
+            root.value = new LinkedList<File>();
+            root.children = new LinkedList<Folder>();
+        }
 
         public int Hight(Folder root)
         {
