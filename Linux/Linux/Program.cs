@@ -185,6 +185,103 @@ namespace Linux
                             }
 
 
+                            string masir2 = "";
+                            for (int i = 1; i < st[1].Length; i++)
+                            {
+                                masir2 += st[1][i];
+                            }
+                            Folder copyHere = tree.root;
+                            string[] address2 = masir2.Split('/');
+                            for (int i = 0; i < address2.Length - 1; i++)
+                            {
+                                bool find = false;
+                                ListNode<Folder> temp = copyHere.children.first();
+                                while (temp != null)
+                                {
+                                    if (temp.value.Name == address2[i])
+                                    {
+                                        thisFolder = temp.value;
+                                        copyHere = temp.value;
+                                        find = true;
+                                        break;
+                                    }
+                                    temp = temp.next;
+                                }
+                                if (!find)
+                                {
+                                    Console.WriteLine(address2[i] + " not found!");
+                                    break;
+                                }
+                            }
+
+
+
+                            bool m = false;
+                            ListNode<Folder> tp = copyfromHere.children.first();
+                            while (tp != null)
+                            {
+                                if (tp.value.Name == address1[address1.Length - 1])
+                                {
+                                    copyHere.children.addFirst(new ListNode<Folder>(tp.value));
+                                    Console.WriteLine("Folder copied.");
+                                    m = true;
+                                    break;
+                                }
+                                tp = tp.next;
+                            }
+                            if (!m)
+                            {
+                                bool mm = false;
+                                ListNode<File> tp2 = copyfromHere.value.first();
+                                while (tp2 != null)
+                                {
+                                    if (tp2.value.Name == address1[address1.Length - 1])
+                                    {
+                                        copyHere.value.addFirst(new ListNode<File>(tp2.value));
+                                        Console.WriteLine("File copied.");
+                                        mm = true;
+                                        break;
+                                    }
+                                    tp2 = tp2.next;
+                                }
+                                if (!mm)
+                                    Console.WriteLine("File or folder with this name was not found!");
+                            }
+
+
+                            break;
+                        }
+                    case "mv":
+                        {
+                            string masir1 = "";
+                            for (int i = 1; i < st[1].Length; i++)
+                            {
+                                masir1 += st[1][i];
+                            }
+                            thisFolder = tree.root;
+                            Folder copyfromHere = tree.root;
+                            string[] address1 = masir1.Split('/');
+                            for (int i = 0; i < address1.Length - 1; i++)
+                            {
+                                bool find = false;
+                                ListNode<Folder> temp = copyfromHere.children.first();
+                                while (temp != null)
+                                {
+                                    if (temp.value.Name == address1[i])
+                                    {
+                                        copyfromHere = temp.value;
+                                        find = true;
+                                        break;
+                                    }
+                                    temp = temp.next;
+                                }
+                                if (!find)
+                                {
+                                    Console.WriteLine(address1[i] + " not found!");
+                                    break;
+                                }
+                            }
+
 
                             string masir2 = "";
                             for (int i = 1; i < st[1].Length; i++)
@@ -216,12 +313,42 @@ namespace Linux
                             }
 
 
-                            // کپی شدنش رو ننوشتم هنوز
 
-                            break;
-                        }
-                    case "mv":
-                        {
+                            bool m = false;
+                            ListNode<Folder> tp = copyfromHere.children.first();
+                            while (tp != null)
+                            {
+                                if (tp.value.Name == address1[address1.Length - 1])
+                                {
+                                    copyHere.children.addFirst(new ListNode<Folder>(tp.value));
+                                    copyfromHere.children.remove(tp);
+                                    Console.WriteLine("Folder cut.");
+                                    m = true;
+                                    break;
+                                }
+                                tp = tp.next;
+                            }
+                            if (!m)
+                            {
+                                bool mm = false;
+                                ListNode<File> tp2 = copyfromHere.value.first();
+                                while (tp2 != null)
+                                {
+                                    if (tp2.value.Name == address1[address1.Length - 1])
+                                    {
+                                        copyHere.value.addFirst(new ListNode<File>(tp2.value));
+                                        copyfromHere.value.remove(tp2);
+                                        Console.WriteLine("File cut.");
+                                        mm = true;
+                                        break;
+                                    }
+                                    tp2 = tp2.next;
+                                }
+                                if (!mm)
+                                    Console.WriteLine("File or folder with this name was not found!");
+                            }
+
+
                             break;
                         }
                     case "ls":
