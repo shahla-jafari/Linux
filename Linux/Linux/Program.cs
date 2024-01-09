@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -227,7 +228,7 @@ namespace Linux
                             {
                                 if (tp.value.Name == address1[address1.Length - 1])
                                 {
-                                    copyHere.children.addFirst(new ListNode<Folder>(tp.value));
+                                    tree.Copy (copyHere, tp.value);
                                     Console.WriteLine("Folder copied.");
                                     m = true;
                                     break;
@@ -326,6 +327,7 @@ namespace Linux
                                 if (tp.value.Name == address1[address1.Length - 1])
                                 {
                                     copyHere.children.addFirst(new ListNode<Folder>(tp.value));
+                                    tp.value.parent = copyHere;
                                     copyfromHere.children.remove(tp);
                                     Console.WriteLine("Folder cut.");
                                     m = true;

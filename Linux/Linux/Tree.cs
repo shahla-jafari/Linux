@@ -35,6 +35,31 @@ namespace Linux
         }
 
 
+        public void Copy(Folder root2 , Folder copyBeshe)
+        {
+            Folder folder = new Folder();
+            folder.Name = copyBeshe.Name;
+            folder.parent = root2;
+            root2.children.addFirst(new ListNode<Folder>(folder));
+
+            // copy value
+            ListNode<File> file = copyBeshe.value.first();
+            while (file != null)
+            {
+                ListNode<File> node = new ListNode<File>(file.value);
+                folder.value.addFirst(node);
+                file = file.next;
+            }
+
+            //copy children
+            ListNode<Folder> childfoldre = copyBeshe.children.first();
+            while (childfoldre != null)
+            {
+                Copy(folder, childfoldre.value);
+                childfoldre = childfoldre.next;
+            }
+        }
+
 
     }
 }
