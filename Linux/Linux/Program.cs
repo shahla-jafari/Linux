@@ -36,10 +36,11 @@ namespace Linux
                     case "pwd":
                         {
                             LinkedList<string> masir = new LinkedList<string>();
-                            while (thisFolder != null)
+                            Folder temp = thisFolder;
+                            while (temp != null)
                             {
-                                masir.addFirst(new ListNode<string>(thisFolder.Name));
-                                thisFolder = thisFolder.parent;
+                                masir.addFirst(new ListNode<string>(temp.Name));
+                                temp = temp.parent;
                             }
                             ListNode<string> output = masir.first();
                             while (output != null)
@@ -150,7 +151,10 @@ namespace Linux
                                 if (f.value.Name == address[address.Length - 1])
                                 {
                                     thisFolder.children.remove(f);
+                                    Console.WriteLine(f.value.Name + " removed.");
+                                    break;
                                 }
+                                f = f.next;
                             }
                             break;
                         }
@@ -187,9 +191,9 @@ namespace Linux
 
 
                             string masir2 = "";
-                            for (int i = 1; i < st[1].Length; i++)
+                            for (int i = 1; i < st[2].Length; i++)
                             {
-                                masir2 += st[1][i];
+                                masir2 += st[2][i];
                             }
                             Folder copyHere = tree.root;
                             string[] address2 = masir2.Split('/');
@@ -285,9 +289,9 @@ namespace Linux
 
 
                             string masir2 = "";
-                            for (int i = 1; i < st[1].Length; i++)
+                            for (int i = 1; i < st[2].Length; i++)
                             {
-                                masir2 += st[1][i];
+                                masir2 += st[2][i];
                             }
                             Folder copyHere = tree.root;
                             string[] address2 = masir2.Split('/');
@@ -433,11 +437,22 @@ namespace Linux
                                 }
                             }
 
+                            ListNode<Folder> tep = BB1.children.first();
+                            while (tep != null)
+                            {
+                                if (tep.value.Name == address1[address1.Length - 1])
+                                {
+                                    BB1 = tep.value;
+                                    break;
+                                }
+                                tep = tep.next;
+                            }
+
 
                             string masir2 = "";
-                            for (int i = 1; i < st[1].Length; i++)
+                            for (int i = 1; i < st[2].Length; i++)
                             {
-                                masir2 += st[1][i];
+                                masir2 += st[2][i];
                             }
                             Folder BB2 = tree.root;
                             string[] address2 = masir2.Split('/');
@@ -462,6 +477,18 @@ namespace Linux
                                     break;
                                 }
                             }
+
+                            ListNode<Folder> tempfolder = BB2.children.first();
+                            while (tep != null)
+                            {
+                                if (tempfolder.value.Name == address2[address2.Length - 1])
+                                {
+                                    BB2 = tempfolder.value;
+                                    break;
+                                }
+                                tempfolder = tempfolder.next;
+                            }
+
 
 
                             Folder valedayeBB1 = BB1;
@@ -494,32 +521,33 @@ namespace Linux
                         {
                             string masir = "";
                             thisFolder = tree.root;
-                            for (int i = 3; i < input.Length; i++)
+                            for (int i = 4; i < input.Length; i++)
                             {
                                 masir += input[i];
                             }
 
                             string[] address = masir.Split('/');
-                            for (int i = 0; i < address.Length; i++)
-                            {
-                                bool find = false;
-                                ListNode<Folder> temp = thisFolder.children.first();
-                                while (temp != null)
+                            if (address[0] != "")
+                                for (int i = 0; i < address.Length; i++)
                                 {
-                                    if (temp.value.Name == address[i])
+                                    bool find = false;
+                                    ListNode<Folder> temp = thisFolder.children.first();
+                                    while (temp != null)
                                     {
-                                        thisFolder = temp.value;
-                                        find = true;
+                                        if (temp.value.Name == address[i])
+                                        {
+                                            thisFolder = temp.value;
+                                            find = true;
+                                            break;
+                                        }
+                                        temp = temp.next;
+                                    }
+                                    if (!find)
+                                    {
+                                        Console.WriteLine(address[i] + " not found!");
                                         break;
                                     }
-                                    temp = temp.next;
                                 }
-                                if (!find)
-                                {
-                                    Console.WriteLine(address[i] + " not found!");
-                                    break;
-                                }
-                            }
                             Console.WriteLine("size of directories : " + thisFolder.children.size);
                             Console.WriteLine("size of files : " + thisFolder.value.size);
                             break;
