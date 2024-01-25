@@ -19,7 +19,7 @@ namespace Linux
             {
                 try
                 {
-                    Console.WriteLine("---------------------------");
+                    Console.WriteLine();
                     string input = Console.ReadLine();
                     string[] st = input.Split(' ');
                     string vorudi = st[0];
@@ -31,7 +31,7 @@ namespace Linux
                                 if (name == "root" || name == "administrator")
                                 {
                                     account = name;
-                                    Console.WriteLine("you are in " + account + " tree.");
+                                    Console.WriteLine("you are in " + account + " account.");
                                 }
                                 else
                                     Console.WriteLine(name + " not found! you are in " + account + " tree.");
